@@ -1,0 +1,10 @@
+transports:
+  cannon:
+    enabled: true
+    height: 600
+  teleporter:
+    enabled: true
+  land:
+    enabled: true
+  target:
+    enabled: true

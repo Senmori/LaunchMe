@@ -100,7 +100,7 @@ fabric.properties
 hs_err_pid*
 
 ### Maven ###
-target/
+src/main/java/net/senmori/launchme/adapters/targets/
 pom.xml.tag
 pom.xml.releaseBackup
 pom.xml.versionsBackup
