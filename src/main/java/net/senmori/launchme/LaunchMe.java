@@ -1,15 +1,13 @@
 package net.senmori.launchme;
 
-import net.senmori.launchme.api.Transport;
-import net.senmori.launchme.api.TransportMethod;
-import net.senmori.launchme.api.TransportOptions;
-import net.senmori.launchme.api.TransportType;
+import net.senmori.launchme.api.*;
 import net.senmori.launchme.managers.DefaultManager;
 import net.senmori.launchme.registries.IRegistry;
 import net.senmori.launchme.registries.RegistryEventHandler;
-import net.senmori.launchme.api.Target;
 import net.senmori.launchme.transport.*;
+import org.bukkit.Bukkit;
 import org.bukkit.NamespacedKey;
+import org.bukkit.plugin.ServicePriority;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.plugin.java.annotation.plugin.ApiVersion;
 import org.bukkit.plugin.java.annotation.plugin.Plugin;
@@ -42,6 +40,13 @@ public class LaunchMe extends JavaPlugin {
         TRANSPORT_OPTIONS_REGISTRY = GameData.makeRegistry( this, GameData.TRANSPORT_OPTIONS, TransportOptions.class ).addCallback( eventHandler ).create();
 
         this.apiManager = new DefaultManager( this );
+
+        Bukkit.getServicesManager().register( TargetManager.class, apiManager, this, ServicePriority.Normal );
+        Bukkit.getServicesManager().register( TransportManager.class, apiManager, this, ServicePriority.Normal );
+        Bukkit.getServicesManager().register( TransportMethodManager.class, apiManager, this, ServicePriority.Normal );
+        Bukkit.getServicesManager().register( TransportOptionsManager.class, apiManager, this, ServicePriority.Normal );
+        Bukkit.getServicesManager().register( TransportTypeManager.class, apiManager, this, ServicePriority.Normal );
+        Bukkit.getServicesManager().register( LaunchMeAPI.class, apiManager, this, ServicePriority.Normal );
     }
 
     @Override

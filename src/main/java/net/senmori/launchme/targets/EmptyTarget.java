@@ -18,9 +18,4 @@ public final class EmptyTarget implements Target {
     public Location getLocation() {
         return null;
     }
-
-    @Override
-    public boolean isValid() {
-        return false;
-    }
 }

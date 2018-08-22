@@ -10,7 +10,7 @@ import net.senmori.launchme.api.TransportType;
 import org.bukkit.Location;
 import org.bukkit.NamespacedKey;
 
-public class DefaultManager extends AbstractManager implements TargetManager, TransportManager, TransportMethodManager, TransportOptionsManager, TransportTypeManager {
+public class DefaultManager extends AbstractManager implements LaunchMeAPI {
 
     private final TargetManager targetManager;
     private final TransportManager transportManager;
