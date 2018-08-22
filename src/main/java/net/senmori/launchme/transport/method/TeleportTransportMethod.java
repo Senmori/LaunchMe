@@ -1,8 +1,8 @@
 package net.senmori.launchme.transport.method;
 
 import net.senmori.launchme.LaunchMe;
-import net.senmori.launchme.transport.Transport;
-import net.senmori.launchme.transport.TransportMethod;
+import net.senmori.launchme.api.Transport;
+import net.senmori.launchme.api.TransportMethod;
 import org.bukkit.NamespacedKey;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.event.player.PlayerTeleportEvent;

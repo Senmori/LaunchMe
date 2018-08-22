@@ -1,9 +1,8 @@
 package net.senmori.launchme.api;
 
-import net.senmori.launchme.transport.TransportType;
 import org.bukkit.NamespacedKey;
 
-public interface TransportTypeFactory {
+public interface TransportTypeManager {
 
     TransportType getTransportType(NamespacedKey key);
 

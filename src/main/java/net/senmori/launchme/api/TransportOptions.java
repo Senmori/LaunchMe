@@ -1,4 +1,4 @@
-package net.senmori.launchme.transport;
+package net.senmori.launchme.api;
 
 import org.bukkit.Keyed;
 import org.bukkit.entity.LivingEntity;

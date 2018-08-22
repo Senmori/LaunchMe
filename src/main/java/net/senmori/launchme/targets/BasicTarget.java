@@ -1,6 +1,6 @@
-package net.senmori.launchme.targets.impl;
+package net.senmori.launchme.targets;
 
-import net.senmori.launchme.targets.Target;
+import net.senmori.launchme.api.Target;
 import org.bukkit.Location;
 import org.bukkit.NamespacedKey;
 import org.jetbrains.annotations.NotNull;

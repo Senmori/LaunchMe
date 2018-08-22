@@ -1,6 +1,5 @@
 package net.senmori.launchme.api;
 
-import net.senmori.launchme.transport.Transport;
 import org.bukkit.Location;
 import org.bukkit.NamespacedKey;
 

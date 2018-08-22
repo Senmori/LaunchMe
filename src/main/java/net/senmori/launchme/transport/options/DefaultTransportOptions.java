@@ -1,7 +1,7 @@
 package net.senmori.launchme.transport.options;
 
 import net.senmori.launchme.LaunchMe;
-import net.senmori.launchme.transport.TransportOptions;
+import net.senmori.launchme.api.TransportOptions;
 import org.bukkit.NamespacedKey;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;

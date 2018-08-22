@@ -1,10 +1,10 @@
 package net.senmori.launchme.transport.types;
 
-import net.senmori.launchme.targets.Target;
-import net.senmori.launchme.transport.Transport;
-import net.senmori.launchme.transport.TransportMethod;
-import net.senmori.launchme.transport.TransportOptions;
-import net.senmori.launchme.transport.TransportType;
+import net.senmori.launchme.api.Target;
+import net.senmori.launchme.api.Transport;
+import net.senmori.launchme.api.TransportMethod;
+import net.senmori.launchme.api.TransportOptions;
+import net.senmori.launchme.api.TransportType;
 import org.bukkit.Location;
 import org.bukkit.NamespacedKey;
 import org.bukkit.entity.LivingEntity;

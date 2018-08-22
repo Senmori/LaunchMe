@@ -1,8 +1,8 @@
 package net.senmori.launchme.adapters.impl;
 
 import net.senmori.launchme.adapters.YamlTypeAdapter;
-import net.senmori.launchme.targets.impl.BasicTarget;
-import net.senmori.launchme.targets.Target;
+import net.senmori.launchme.targets.BasicTarget;
+import net.senmori.launchme.api.Target;
 import org.bukkit.Location;
 import org.bukkit.NamespacedKey;
 import org.bukkit.configuration.ConfigurationSection;

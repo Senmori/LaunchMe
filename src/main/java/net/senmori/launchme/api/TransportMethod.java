@@ -1,6 +1,6 @@
-package net.senmori.launchme.transport;
+package net.senmori.launchme.api;
 
-import net.senmori.launchme.targets.impl.EmptyTarget;
+import net.senmori.launchme.targets.EmptyTarget;
 import org.bukkit.Keyed;
 import org.bukkit.entity.LivingEntity;
 

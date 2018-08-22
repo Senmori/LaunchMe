@@ -1,67 +1,90 @@
 package net.senmori.launchme.managers;
 
 import net.senmori.launchme.LaunchMe;
-import net.senmori.launchme.api.TransportTypeBuilder;
-import net.senmori.launchme.registries.IRegistry;
-import net.senmori.launchme.registries.RegistryManager;
-import net.senmori.launchme.api.TargetManager;
-import net.senmori.launchme.api.TransportManager;
-import net.senmori.launchme.api.TransportTypeFactory;
-import net.senmori.launchme.targets.Target;
-import net.senmori.launchme.transport.Transport;
-import net.senmori.launchme.transport.TransportType;
+import net.senmori.launchme.api.*;
+import net.senmori.launchme.api.Target;
+import net.senmori.launchme.api.Transport;
+import net.senmori.launchme.api.TransportMethod;
+import net.senmori.launchme.api.TransportOptions;
+import net.senmori.launchme.api.TransportType;
 import org.bukkit.Location;
 import org.bukkit.NamespacedKey;
 
-public class DefaultManager implements TargetManager, TransportManager, TransportTypeFactory {
+public class DefaultManager extends AbstractManager implements TargetManager, TransportManager, TransportMethodManager, TransportOptionsManager, TransportTypeManager {
 
-    private final IRegistry<Target> targetRegistry = RegistryManager.ACTIVE.getRegistry( Target.class );
-    private final IRegistry<Transport> transportRegistry = RegistryManager.ACTIVE.getRegistry( Transport.class );
-    private final IRegistry<TransportType> transportTypeRegistry = RegistryManager.ACTIVE.getRegistry( TransportType.class );
-    private final LaunchMe plugin;
+    private final TargetManager targetManager;
+    private final TransportManager transportManager;
+    private final TransportMethodManager transportMethodManager;
+    private final TransportOptionsManager transportOptionsManager;
+    private final TransportTypeManager transportTypeManager;
 
     public DefaultManager(LaunchMe plugin) {
-        this.plugin = plugin;
+        super( plugin );
+        this.targetManager = new DefaultTargetManager( getPlugin() );
+        this.transportManager = new DefaultTransportManager( getPlugin() );
+        this.transportMethodManager = new DefaultTransportMethodManager( getPlugin() );
+        this.transportOptionsManager = new DefaultTransportOptionsManager( getPlugin() );
+        this.transportTypeManager = new DefaultTransportTypeManager( getPlugin() );
     }
 
     @Override
     public Target getTarget(NamespacedKey key) {
-        return targetRegistry.getValue( key );
+        return targetManager.getTarget( key );
     }
 
     @Override
     public Target getTarget(Location location) {
-        return targetRegistry.getValue( location );
+        return targetManager.getTarget( location );
     }
 
     @Override
     public void registerTarget(Target target) {
-        targetRegistry.register( target );
+        targetManager.registerTarget( target );
     }
 
     @Override
     public Transport getTransport(NamespacedKey key) {
-        return transportRegistry.getValue( key );
+        return transportManager.getTransport( key );
     }
 
     @Override
     public Transport getTransport(Location location) {
-        return transportRegistry.getValue( location );
+        return transportManager.getTransport( location );
     }
 
     @Override
     public void registerTransport(Transport transport) {
-        transportRegistry.register( transport );
+        transportManager.registerTransport( transport );
+    }
+
+    @Override
+    public TransportMethod getTransportMethod(NamespacedKey key) {
+        return transportMethodManager.getTransportMethod( key );
+    }
+
+    @Override
+    public void register(TransportMethod method) {
+        transportMethodManager.register( method );
+    }
+
+    @Override
+    public TransportOptions getOption(NamespacedKey key) {
+        return transportOptionsManager.getOption( key );
+    }
+
+    @Override
+    public void register(TransportOptions options) {
+        transportOptionsManager.register( options );
     }
 
     @Override
     public TransportType getTransportType(NamespacedKey key) {
-        return transportTypeRegistry.getValue( key );
+        return transportTypeManager.getTransportType( key );
     }
 
     @Override
     public void register(TransportType type) {
-        transportTypeRegistry.register( type );
+        transportTypeManager.register( type );
     }
 
     @Override

@@ -1,4 +1,4 @@
-package net.senmori.launchme.targets;
+package net.senmori.launchme.api;
 
 import org.bukkit.Keyed;
 import org.bukkit.Location;

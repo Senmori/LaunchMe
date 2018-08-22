@@ -1,8 +1,13 @@
 package net.senmori.launchme;
 
+import net.senmori.launchme.api.Transport;
+import net.senmori.launchme.api.TransportMethod;
+import net.senmori.launchme.api.TransportOptions;
+import net.senmori.launchme.api.TransportType;
+import net.senmori.launchme.managers.DefaultManager;
 import net.senmori.launchme.registries.IRegistry;
 import net.senmori.launchme.registries.RegistryEventHandler;
-import net.senmori.launchme.targets.Target;
+import net.senmori.launchme.api.Target;
 import net.senmori.launchme.transport.*;
 import org.bukkit.NamespacedKey;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -24,6 +29,7 @@ public class LaunchMe extends JavaPlugin {
     private IRegistry<TransportOptions> TRANSPORT_OPTIONS_REGISTRY;
 
     private final RegistryEventHandler eventHandler = new RegistryEventHandler();
+    private DefaultManager apiManager;
 
     @Override
     public void onLoad() {
@@ -34,6 +40,8 @@ public class LaunchMe extends JavaPlugin {
         TRANSPORT_METHOD_REGISTRY = GameData.makeRegistry( this, GameData.TRANSPORT_METHODS, TransportMethod.class ).addCallback( eventHandler ).create();
         TRANSPORT_TYPE_REGISTRY = GameData.makeRegistry( this, GameData.TRANSPORT_TYPES, TransportType.class ).addCallback( eventHandler ).create();
         TRANSPORT_OPTIONS_REGISTRY = GameData.makeRegistry( this, GameData.TRANSPORT_OPTIONS, TransportOptions.class ).addCallback( eventHandler ).create();
+
+        this.apiManager = new DefaultManager( this );
     }
 
     @Override
