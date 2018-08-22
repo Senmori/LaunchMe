@@ -7,8 +7,11 @@ import net.senmori.launchme.api.Transport;
 import net.senmori.launchme.api.TransportMethod;
 import net.senmori.launchme.api.TransportOptions;
 import net.senmori.launchme.api.TransportType;
+import net.senmori.launchme.api.manager.*;
 import org.bukkit.Location;
 import org.bukkit.NamespacedKey;
+
+import java.util.Collection;
 
 public class DefaultManager extends AbstractManager implements LaunchMeAPI {
 
@@ -20,11 +23,11 @@ public class DefaultManager extends AbstractManager implements LaunchMeAPI {
 
     public DefaultManager(LaunchMe plugin) {
         super( plugin );
-        this.targetManager = new DefaultTargetManager( getPlugin() );
-        this.transportManager = new DefaultTransportManager( getPlugin() );
-        this.transportMethodManager = new DefaultTransportMethodManager( getPlugin() );
-        this.transportOptionsManager = new DefaultTransportOptionsManager( getPlugin() );
-        this.transportTypeManager = new DefaultTransportTypeManager( getPlugin() );
+        this.targetManager = new TargetManagerImpl( getPlugin() );
+        this.transportManager = new TransportManagerImpl( getPlugin() );
+        this.transportMethodManager = new TransportMethodManagerImpl( getPlugin() );
+        this.transportOptionsManager = new TransportOptionsManagerImpl( getPlugin() );
+        this.transportTypeManager = new TransportTypeManagerImpl( getPlugin() );
     }
 
     @Override
@@ -43,6 +46,11 @@ public class DefaultManager extends AbstractManager implements LaunchMeAPI {
     }
 
     @Override
+    public Collection<Target> getRegisteredTargets() {
+        return targetManager.getRegisteredTargets();
+    }
+
+    @Override
     public Transport getTransport(NamespacedKey key) {
         return transportManager.getTransport( key );
     }
@@ -58,6 +66,11 @@ public class DefaultManager extends AbstractManager implements LaunchMeAPI {
     }
 
     @Override
+    public Collection<Transport> getRegisteredTransports() {
+        return transportManager.getRegisteredTransports();
+    }
+
+    @Override
     public TransportMethod getTransportMethod(NamespacedKey key) {
         return transportMethodManager.getTransportMethod( key );
     }
@@ -68,6 +81,11 @@ public class DefaultManager extends AbstractManager implements LaunchMeAPI {
     }
 
     @Override
+    public Collection<TransportMethod> getRegisteredMethods() {
+        return transportMethodManager.getRegisteredMethods();
+    }
+
+    @Override
     public TransportOptions getOption(NamespacedKey key) {
         return transportOptionsManager.getOption( key );
     }
@@ -75,6 +93,11 @@ public class DefaultManager extends AbstractManager implements LaunchMeAPI {
     @Override
     public void register(TransportOptions options) {
         transportOptionsManager.register( options );
+    }
+
+    @Override
+    public Collection<TransportOptions> getRegisteredOptions() {
+        return transportOptionsManager.getRegisteredOptions();
     }
 
     @Override
@@ -90,5 +113,10 @@ public class DefaultManager extends AbstractManager implements LaunchMeAPI {
     @Override
     public TransportTypeBuilder getBuilder(NamespacedKey key) {
         return new TransportTypeBuilder( key );
+    }
+
+    @Override
+    public Collection<TransportType> getRegisteredTypes() {
+        return transportTypeManager.getRegisteredTypes();
     }
 }

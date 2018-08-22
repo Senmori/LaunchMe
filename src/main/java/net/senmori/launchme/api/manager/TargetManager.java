@@ -1,7 +1,10 @@
-package net.senmori.launchme.api;
+package net.senmori.launchme.api.manager;
 
+import net.senmori.launchme.api.Target;
 import org.bukkit.Location;
 import org.bukkit.NamespacedKey;
+
+import java.util.Collection;
 
 public interface TargetManager {
 
@@ -10,4 +13,6 @@ public interface TargetManager {
     Target getTarget(Location location);
 
     void registerTarget(Target target);
+
+    Collection<Target> getRegisteredTargets();
 }

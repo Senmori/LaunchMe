@@ -1,7 +1,10 @@
-package net.senmori.launchme.api;
+package net.senmori.launchme.api.manager;
 
+import net.senmori.launchme.api.Transport;
 import org.bukkit.Location;
 import org.bukkit.NamespacedKey;
+
+import java.util.Collection;
 
 public interface TransportManager {
 
@@ -11,5 +14,5 @@ public interface TransportManager {
 
     void registerTransport(Transport transport);
 
-
+    Collection<Transport> getRegisteredTransports();
 }

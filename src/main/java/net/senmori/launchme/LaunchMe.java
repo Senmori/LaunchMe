@@ -1,6 +1,7 @@
 package net.senmori.launchme;
 
 import net.senmori.launchme.api.*;
+import net.senmori.launchme.api.manager.*;
 import net.senmori.launchme.managers.DefaultManager;
 import net.senmori.launchme.registries.IRegistry;
 import net.senmori.launchme.registries.RegistryEventHandler;
@@ -27,7 +28,7 @@ public class LaunchMe extends JavaPlugin {
     private IRegistry<TransportOptions> TRANSPORT_OPTIONS_REGISTRY;
 
     private final RegistryEventHandler eventHandler = new RegistryEventHandler();
-    private DefaultManager apiManager;
+    private DefaultManager defaultManager;
 
     @Override
     public void onLoad() {
@@ -39,14 +40,14 @@ public class LaunchMe extends JavaPlugin {
         TRANSPORT_TYPE_REGISTRY = GameData.makeRegistry( this, GameData.TRANSPORT_TYPES, TransportType.class ).addCallback( eventHandler ).create();
         TRANSPORT_OPTIONS_REGISTRY = GameData.makeRegistry( this, GameData.TRANSPORT_OPTIONS, TransportOptions.class ).addCallback( eventHandler ).create();
 
-        this.apiManager = new DefaultManager( this );
+        this.defaultManager = new DefaultManager( this );
 
-        Bukkit.getServicesManager().register( TargetManager.class, apiManager, this, ServicePriority.Normal );
-        Bukkit.getServicesManager().register( TransportManager.class, apiManager, this, ServicePriority.Normal );
-        Bukkit.getServicesManager().register( TransportMethodManager.class, apiManager, this, ServicePriority.Normal );
-        Bukkit.getServicesManager().register( TransportOptionsManager.class, apiManager, this, ServicePriority.Normal );
-        Bukkit.getServicesManager().register( TransportTypeManager.class, apiManager, this, ServicePriority.Normal );
-        Bukkit.getServicesManager().register( LaunchMeAPI.class, apiManager, this, ServicePriority.Normal );
+        Bukkit.getServicesManager().register( TargetManager.class, defaultManager, this, ServicePriority.Normal );
+        Bukkit.getServicesManager().register( TransportManager.class, defaultManager, this, ServicePriority.Normal );
+        Bukkit.getServicesManager().register( TransportMethodManager.class, defaultManager, this, ServicePriority.Normal );
+        Bukkit.getServicesManager().register( TransportOptionsManager.class, defaultManager, this, ServicePriority.Normal );
+        Bukkit.getServicesManager().register( TransportTypeManager.class, defaultManager, this, ServicePriority.Normal );
+        Bukkit.getServicesManager().register( LaunchMeAPI.class, defaultManager, this, ServicePriority.Normal );
     }
 
     @Override
