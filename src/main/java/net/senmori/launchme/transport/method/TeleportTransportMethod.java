@@ -13,7 +13,7 @@ public class TeleportTransportMethod implements TransportMethod {
     @Override
     public void transport(LivingEntity entity, Transport transport) {
         if ( isValid( transport ) ) {
-            entity.teleport( transport.getLocation(), PlayerTeleportEvent.TeleportCause.PLUGIN );
+            entity.teleport( transport.getTarget().getLocation(), PlayerTeleportEvent.TeleportCause.PLUGIN );
         }
     }
 

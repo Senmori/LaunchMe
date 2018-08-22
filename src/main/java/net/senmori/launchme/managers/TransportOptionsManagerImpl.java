@@ -21,7 +21,7 @@ public class TransportOptionsManagerImpl extends RegisteredManager<TransportOpti
     }
 
     @Override
-    public void register(TransportOptions options) {
+    public void registerTransportOption(TransportOptions options) {
         getRegistry().register( options );
     }
 

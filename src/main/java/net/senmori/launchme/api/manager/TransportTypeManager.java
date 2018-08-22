@@ -10,7 +10,7 @@ public interface TransportTypeManager {
 
     TransportType getTransportType(NamespacedKey key);
 
-    void register(TransportType type);
+    void registerTransportType(TransportType type);
 
     TransportTypeBuilder getBuilder(NamespacedKey key);
 

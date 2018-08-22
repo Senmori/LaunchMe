@@ -76,8 +76,8 @@ public class DefaultManager extends AbstractManager implements LaunchMeAPI {
     }
 
     @Override
-    public void register(TransportMethod method) {
-        transportMethodManager.register( method );
+    public void registerTransportMethod(TransportMethod method) {
+        transportMethodManager.registerTransportMethod( method );
     }
 
     @Override
@@ -91,8 +91,8 @@ public class DefaultManager extends AbstractManager implements LaunchMeAPI {
     }
 
     @Override
-    public void register(TransportOptions options) {
-        transportOptionsManager.register( options );
+    public void registerTransportOption(TransportOptions options) {
+        transportOptionsManager.registerTransportOption( options );
     }
 
     @Override
@@ -106,8 +106,8 @@ public class DefaultManager extends AbstractManager implements LaunchMeAPI {
     }
 
     @Override
-    public void register(TransportType type) {
-        transportTypeManager.register( type );
+    public void registerTransportType(TransportType type) {
+        transportTypeManager.registerTransportType( type );
     }
 
     @Override

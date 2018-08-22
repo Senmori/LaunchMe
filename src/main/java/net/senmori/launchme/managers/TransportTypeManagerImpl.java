@@ -21,7 +21,7 @@ public class TransportTypeManagerImpl extends RegisteredManager<TransportType> i
     }
 
     @Override
-    public void register(TransportType type) {
+    public void registerTransportType(TransportType type) {
         getRegistry().register( type );
     }
 

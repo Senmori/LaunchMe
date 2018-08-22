@@ -2,7 +2,7 @@ package net.senmori.launchme.registries;
 
 import com.google.common.collect.BiMap;
 import com.google.common.collect.HashBiMap;
-import net.senmori.launchme.api.ILocatable;
+import net.senmori.launchme.transport.ILocatable;
 import org.bukkit.Keyed;
 import org.bukkit.Location;
 import org.bukkit.NamespacedKey;

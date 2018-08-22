@@ -48,6 +48,8 @@ public class LaunchMe extends JavaPlugin {
         Bukkit.getServicesManager().register( TransportOptionsManager.class, defaultManager, this, ServicePriority.Normal );
         Bukkit.getServicesManager().register( TransportTypeManager.class, defaultManager, this, ServicePriority.Normal );
         Bukkit.getServicesManager().register( LaunchMeAPI.class, defaultManager, this, ServicePriority.Normal );
+
+        defaultManager.registerTransportType( TransportType.TELEPORT );
     }
 
     @Override

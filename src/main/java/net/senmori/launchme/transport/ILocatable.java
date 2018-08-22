@@ -1,4 +1,4 @@
-package net.senmori.launchme.api;
+package net.senmori.launchme.transport;
 
 import org.bukkit.Location;
 

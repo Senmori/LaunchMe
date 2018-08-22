@@ -9,7 +9,7 @@ public interface TransportMethodManager {
 
     TransportMethod getTransportMethod(NamespacedKey key);
 
-    void register(TransportMethod method);
+    void registerTransportMethod(TransportMethod method);
 
     Collection<TransportMethod> getRegisteredMethods();
 }

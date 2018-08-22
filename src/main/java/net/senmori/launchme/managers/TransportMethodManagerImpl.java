@@ -20,7 +20,7 @@ public class TransportMethodManagerImpl extends RegisteredManager<TransportMetho
     }
 
     @Override
-    public void register(TransportMethod method) {
+    public void registerTransportMethod(TransportMethod method) {
         getRegistry().register( method );
     }
 

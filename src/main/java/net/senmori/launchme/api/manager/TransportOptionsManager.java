@@ -9,7 +9,7 @@ public interface TransportOptionsManager {
 
     TransportOptions getOption(NamespacedKey key);
 
-    void register(TransportOptions options);
+    void registerTransportOption(TransportOptions options);
 
     Collection<TransportOptions> getRegisteredOptions();
 }
