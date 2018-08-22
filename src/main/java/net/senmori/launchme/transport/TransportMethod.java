@@ -1,16 +1,17 @@
 package net.senmori.launchme.transport;
 
 import net.senmori.launchme.targets.impl.EmptyTarget;
+import org.bukkit.Keyed;
 import org.bukkit.entity.LivingEntity;
 
-public interface TransportMethod {
+public interface TransportMethod extends Keyed {
 
     /**
      * Transports an entity according to a given {@link Transport}'s options
      * and {@link TransportMethod}
      *
-     * @param entity
-     * @param transport
+     * @param entity the entity to transport
+     * @param transport the {@link Transport} to retrieve information from
      */
     void transport(LivingEntity entity, Transport transport);
 

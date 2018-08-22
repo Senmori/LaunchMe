@@ -1,14 +1,12 @@
 package net.senmori.launchme.targets;
 
+import org.bukkit.Keyed;
 import org.bukkit.Location;
-import org.bukkit.NamespacedKey;
 
 /**
  * Represents a {@link Location} in a World that can receive
  */
-public interface Target {
-
-    NamespacedKey getName();
+public interface Target extends Keyed {
 
     Location getLocation();
 

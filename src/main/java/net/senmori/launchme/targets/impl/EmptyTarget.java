@@ -10,7 +10,7 @@ import org.bukkit.NamespacedKey;
 public final class EmptyTarget implements Target {
 
     @Override
-    public NamespacedKey getName() {
+    public NamespacedKey getKey() {
         return null;
     }
 

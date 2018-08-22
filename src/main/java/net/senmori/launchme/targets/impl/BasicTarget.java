@@ -14,7 +14,7 @@ public class BasicTarget implements Target {
     }
 
     @Override
-    public NamespacedKey getName() {
+    public NamespacedKey getKey() {
         return name;
     }
 
