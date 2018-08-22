@@ -2,6 +2,8 @@ package net.senmori.launchme.transport;
 
 import net.senmori.launchme.LaunchMe;
 import net.senmori.launchme.registries.RegistryBuilder;
+import net.senmori.launchme.transport.method.TeleportTransportMethod;
+import net.senmori.launchme.transport.options.DefaultTransportOptions;
 import org.apiguardian.api.API;
 import org.bukkit.Keyed;
 import org.bukkit.NamespacedKey;
@@ -31,5 +33,14 @@ public class GameData {
 
     public static <V extends Keyed> RegistryBuilder<V> makeRegistry(org.bukkit.plugin.Plugin owner, NamespacedKey key, Class<V> type) {
         return new RegistryBuilder<>(owner, key, type);
+    }
+
+
+    public static TransportMethod defaultTransportMethod() {
+        return new TeleportTransportMethod();
+    }
+
+    public static TransportOptions defaultTransportOptions() {
+        return new DefaultTransportOptions();
     }
 }

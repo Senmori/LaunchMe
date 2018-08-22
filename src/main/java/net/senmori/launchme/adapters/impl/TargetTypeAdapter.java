@@ -14,14 +14,14 @@ public class TargetTypeAdapter implements YamlTypeAdapter<Target> {
     @Override
     public Target deserialize(ConfigurationSection section) {
         NamespacedKey key = KEY_ADAPTER.deserialize( section );
-        Location location = section.getSerializable("location", Location.class);
-        return new BasicTarget(key, location);
+        Location location = section.getSerializable( "location", Location.class );
+        return new BasicTarget( key, location );
     }
 
     @Override
     public boolean serialize(Target value, FileConfiguration config) {
-        ConfigurationSection section = config.createSection(value.getName().toString());
-        section.set("location", value.getLocation());
-        return config.isConfigurationSection(value.getName().toString());
+        ConfigurationSection section = config.createSection( KEY_ADAPTER.toString( value.getKey() ) );
+        section.set( "location", value.getLocation() );
+        return config.isConfigurationSection( value.getKey().toString() );
     }
 }

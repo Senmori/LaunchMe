@@ -9,7 +9,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.Collection;
 import java.util.Map;
 
-public interface IRegistry<V extends Keyed> extends Keyed {
+public interface IRegistry<V extends Keyed> extends Keyed, IRegistryLocatable<V> {
 
     Class<V> getSuperType();
 

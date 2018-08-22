@@ -8,7 +8,7 @@ import org.bukkit.entity.LivingEntity;
 import org.bukkit.event.player.PlayerTeleportEvent;
 
 public class TeleportTransportMethod implements TransportMethod {
-    private static final NamespacedKey key = new NamespacedKey( LaunchMe.getInstance(), "teleport" );
+    private static final NamespacedKey key = LaunchMe.createKey( "teleport" );
 
     @Override
     public void transport(LivingEntity entity, Transport transport) {

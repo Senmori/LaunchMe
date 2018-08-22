@@ -2,7 +2,9 @@ package net.senmori.launchme.registries;
 
 import com.google.common.collect.BiMap;
 import com.google.common.collect.HashBiMap;
+import net.senmori.launchme.api.ILocatable;
 import org.bukkit.Keyed;
+import org.bukkit.Location;
 import org.bukkit.NamespacedKey;
 import org.bukkit.plugin.Plugin;
 import org.jetbrains.annotations.NotNull;
@@ -17,6 +19,7 @@ import java.util.stream.Stream;
 public class LaunchMeRegistry<V extends Keyed> implements IRegistryModifiable<V> {
 
     private final BiMap<NamespacedKey, V> registry = HashBiMap.create();
+    private final BiMap<Location, NamespacedKey> locatableMap = HashBiMap.create();
     private final Plugin owner;
     private final NamespacedKey key;
     private final Class<V> type;
@@ -68,7 +71,14 @@ public class LaunchMeRegistry<V extends Keyed> implements IRegistryModifiable<V>
     }
 
     @Override
-    public @Nullable NamespacedKey getKey(V value) {
+    @Nullable
+    public V getValue(Location location) {
+        return registry.get( locatableMap.get( location ) );
+    }
+
+    @Override
+    @Nullable
+    public NamespacedKey getKey(V value) {
         return registry.inverse().get( value );
     }
 
@@ -76,6 +86,11 @@ public class LaunchMeRegistry<V extends Keyed> implements IRegistryModifiable<V>
     public void register(@NotNull V value) {
         V old = registry.get( value.getKey() );
         registry.put( value.getKey(), value );
+
+        if (value instanceof ILocatable ) {
+            locatableMap.put( ((ILocatable)value).getLocation(), value.getKey() );
+        }
+
         addCallbacks.forEach( (callback) -> callback.onAdd( this, value, old ) );
     }
 

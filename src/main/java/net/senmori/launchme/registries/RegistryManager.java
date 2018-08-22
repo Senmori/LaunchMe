@@ -48,6 +48,10 @@ public class RegistryManager implements IRegistryManager {
         return ( IRegistry<V> ) registries.get( key );
     }
 
+    public <V extends Keyed> IRegistry<V> getRegistry(Class<V> type) {
+        return ( IRegistry<V> ) registries.get( superTypes.get( type ) );
+    }
+
     public <V extends Keyed> IRegistry<V> createRegistry(NamespacedKey key, Class<V> type, Plugin owner) {
         return createRegistry( key, type, owner, Lists.newArrayList(), Lists.newArrayList(), Lists.newArrayList(), Lists.newArrayList() );
     }
