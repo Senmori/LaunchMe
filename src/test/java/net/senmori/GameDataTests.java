@@ -1,7 +1,7 @@
 package net.senmori;
 
 import net.senmori.launchme.LaunchMe;
-import net.senmori.launchme.util.GameData;
+import net.senmori.launchme.transport.GameData;
 import org.bukkit.NamespacedKey;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;

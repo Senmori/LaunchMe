@@ -17,11 +17,12 @@ public class BasicTransport implements Transport {
     private final TransportMethod method;
     private final Location location;
     private Target target;
-    public BasicTransport(NamespacedKey key, TransportType type, TransportOptions options, TransportMethod method, Location location) {
+
+    public BasicTransport(NamespacedKey key, TransportType type, Location location) {
         this.key = key;
         this.type = type;
-        this.options = options;
-        this.method = method;
+        this.options = type.getTransportOptions();
+        this.method = type.getTransportMethod();
         this.location = location;
     }
 

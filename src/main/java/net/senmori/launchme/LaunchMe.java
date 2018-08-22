@@ -1,11 +1,9 @@
 package net.senmori.launchme;
 
 import net.senmori.launchme.registries.IRegistry;
-import net.senmori.launchme.registries.RegistryBuilder;
 import net.senmori.launchme.registries.RegistryEventHandler;
 import net.senmori.launchme.targets.Target;
-import net.senmori.launchme.transport.Transport;
-import net.senmori.launchme.transport.TransportMethod;
+import net.senmori.launchme.transport.*;
 import org.bukkit.NamespacedKey;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.plugin.java.annotation.plugin.ApiVersion;
@@ -22,27 +20,25 @@ public class LaunchMe extends JavaPlugin {
     private IRegistry<Target> TARGET_REGISTRY;
     private IRegistry<Transport> TRANSPORT_REGISTRY;
     private IRegistry<TransportMethod> TRANSPORT_METHOD_REGISTRY;
+    private IRegistry<TransportType> TRANSPORT_TYPE_REGISTRY;
+    private IRegistry<TransportOptions> TRANSPORT_OPTIONS_REGISTRY;
 
     private final RegistryEventHandler eventHandler = new RegistryEventHandler();
 
     @Override
-    public void onEnable() {
+    public void onLoad() {
         INSTANCE = this;
 
-        NamespacedKey targetKey = new NamespacedKey( this, "targets" );
-        RegistryBuilder builder = new RegistryBuilder<>(this, targetKey, Target.class);
-        builder.addCallback( eventHandler );
-        TARGET_REGISTRY = builder.create();
+        TARGET_REGISTRY = GameData.makeRegistry( this, GameData.TARGETS, Target.class).addCallback( eventHandler ).create();
+        TRANSPORT_REGISTRY = GameData.makeRegistry( this, GameData.TRANSPORTS, Transport.class ).addCallback( eventHandler ).create();
+        TRANSPORT_METHOD_REGISTRY = GameData.makeRegistry( this, GameData.TRANSPORT_METHODS, TransportMethod.class ).addCallback( eventHandler ).create();
+        TRANSPORT_TYPE_REGISTRY = GameData.makeRegistry( this, GameData.TRANSPORT_TYPES, TransportType.class ).addCallback( eventHandler ).create();
+        TRANSPORT_OPTIONS_REGISTRY = GameData.makeRegistry( this, GameData.TRANSPORT_OPTIONS, TransportOptions.class ).addCallback( eventHandler ).create();
+    }
 
-        NamespacedKey transportKey = new NamespacedKey( this, "transports" );
-        builder = new RegistryBuilder( this, transportKey, Transport.class );
-        builder.addCallback( eventHandler );
-        TRANSPORT_REGISTRY = builder.create();
+    @Override
+    public void onEnable() {
 
-        NamespacedKey methodKey = new NamespacedKey( this, "transportMethods" );
-        builder = new RegistryBuilder( this, methodKey, TransportMethod.class );
-        builder.addCallback( eventHandler );
-        TRANSPORT_METHOD_REGISTRY = builder.create();
     }
 
     @Override
@@ -59,6 +55,6 @@ public class LaunchMe extends JavaPlugin {
     }
 
     public static NamespacedKey createKey(String key) {
-        return new NamespacedKey( "launchme", key );
+        return GameData.checkKey( key );
     }
 }

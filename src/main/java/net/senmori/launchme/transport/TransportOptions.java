@@ -1,8 +1,9 @@
 package net.senmori.launchme.transport;
 
+import org.bukkit.Keyed;
 import org.bukkit.entity.LivingEntity;
 
-public interface TransportOptions {
+public interface TransportOptions extends Keyed {
 
     /**
      * Check if this Transport can transport non-player entities.
