@@ -2,14 +2,7 @@ package net.senmori.launchme.transport;
 
 import org.bukkit.entity.LivingEntity;
 
-public interface ITransportOptions {
-
-    /**
-     * Get the {@link ITransport} these options are attached to.
-     *
-     * @return the {@link ITransport}
-     */
-    ITransport getTransport();
+public interface TransportOptions {
 
     /**
      * Check if this Transport can transport non-player entities.

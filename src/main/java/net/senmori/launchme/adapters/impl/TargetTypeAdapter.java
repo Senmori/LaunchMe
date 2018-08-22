@@ -1,27 +1,27 @@
-package net.senmori.launchme.adapters;
+package net.senmori.launchme.adapters.impl;
 
-import net.senmori.launchme.targets.BasicTarget;
-import net.senmori.launchme.targets.EmptyTarget;
+import net.senmori.launchme.adapters.YamlTypeAdapter;
+import net.senmori.launchme.targets.impl.BasicTarget;
 import net.senmori.launchme.targets.Target;
 import org.bukkit.Location;
+import org.bukkit.NamespacedKey;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.FileConfiguration;
 
 public class TargetTypeAdapter implements YamlTypeAdapter<Target> {
+    private static final NamespacedKeyTypeAdapter KEY_ADAPTER = new NamespacedKeyTypeAdapter();
+
     @Override
     public Target deserialize(ConfigurationSection section) {
-        if (section.getKeys(false).isEmpty()) {
-            return new EmptyTarget();
-        }
-        String name = section.getName();
+        NamespacedKey key = KEY_ADAPTER.deserialize( section );
         Location location = section.getSerializable("location", Location.class);
-        return new BasicTarget(name, location);
+        return new BasicTarget(key, location);
     }
 
     @Override
     public boolean serialize(Target value, FileConfiguration config) {
-        ConfigurationSection section = config.createSection(value.getName());
+        ConfigurationSection section = config.createSection(value.getName().toString());
         section.set("location", value.getLocation());
-        return config.isConfigurationSection(value.getName());
+        return config.isConfigurationSection(value.getName().toString());
     }
 }

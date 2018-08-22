@@ -1,25 +1,16 @@
 package net.senmori.launchme.targets;
 
 import org.bukkit.Location;
+import org.bukkit.NamespacedKey;
 
 /**
- * Represents the targets for a launch pad.
+ * Represents a {@link Location} in a World that can receive
  */
-public abstract class Target {
+public interface Target {
 
-    /**
-     * Gets the name of this targets.
-     *
-     * @return the name of the targets
-     */
-    public abstract String getName();
+    NamespacedKey getName();
 
-    /**
-     * Get the {@link Location} of this targets.
-     *
-     * @return the location of this targets
-     */
-    public abstract Location getLocation();
+    Location getLocation();
 
     /**
      * Is this a valid {@link Target}? A valid Target is one
@@ -28,7 +19,7 @@ public abstract class Target {
      *
      * @return true if valid
      */
-    public boolean isValid() {
-        return true;
+    default boolean isValid() {
+        return getLocation() != null && getLocation().getWorld() != null;
     }
 }

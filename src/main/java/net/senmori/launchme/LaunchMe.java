@@ -1,16 +1,13 @@
 package net.senmori.launchme;
 
-import net.senmori.launchme.configuration.TargetConfiguration;
 import net.senmori.launchme.managers.TargetManagerImpl;
-import net.senmori.senlib.configuration.ConfigManager;
+import net.senmori.launchme.service.TargetManager;
+import org.bukkit.NamespacedKey;
+import org.bukkit.plugin.ServicePriority;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.plugin.java.annotation.plugin.ApiVersion;
 import org.bukkit.plugin.java.annotation.plugin.Plugin;
 import org.bukkit.plugin.java.annotation.plugin.author.Author;
-
-import java.io.File;
-import java.util.HashMap;
-import java.util.Map;
 
 @Plugin(name = "LaunchMe", version = "0.5")
 @Author("Bitjump")
@@ -19,9 +16,6 @@ import java.util.Map;
 public class LaunchMe extends JavaPlugin {
     private static LaunchMe INSTANCE;
 
-    private Map<String, ConfigManager> configurations = new HashMap<>();
-    private TargetConfiguration targetConfiguration;
-
     private TargetManagerImpl targetManager;
 
     @Override
@@ -29,19 +23,24 @@ public class LaunchMe extends JavaPlugin {
         INSTANCE = this;
 
         this.targetManager = new TargetManagerImpl();
-        this.targetConfiguration = new TargetConfiguration( this, new File( this.getDataFolder(), "targets.yml" ) );
-        this.targetConfiguration.addListener( targetManager );
-        this.configurations.put( "targets", targetConfiguration );
-        targetConfiguration.load();
+        getServer().getServicesManager().register( TargetManager.class, targetManager, this, ServicePriority.Normal );
 
     }
 
     @Override
     public void onDisable() {
-        configurations.values().forEach( ConfigManager::save );
+
     }
 
     public static LaunchMe getInstance() {
         return INSTANCE;
+    }
+
+    public static NamespacedKey getDefaultKey() {
+        return new NamespacedKey( "launchme", "null" );
+    }
+
+    public static NamespacedKey createKey(String key) {
+        return new NamespacedKey( "launchme", key );
     }
 }

@@ -1,13 +1,14 @@
-package net.senmori.launchme.managers;
+package net.senmori.launchme.service;
 
-import net.senmori.launchme.targets.EmptyTarget;
+import net.senmori.launchme.targets.impl.EmptyTarget;
 import net.senmori.launchme.targets.Target;
+import org.bukkit.NamespacedKey;
 
 /**
  * This manager is the contract for how {@link Target}s are
  * queried, registered, and removed.
  */
-public interface ITargetManager {
+public interface TargetManager {
 
     /**
      * Check if a {@link Target} is registered
@@ -15,7 +16,7 @@ public interface ITargetManager {
      * @param name the name of the Target
      * @return true if the Target is already registered
      */
-    boolean isRegistered(String name);
+    boolean isRegistered(NamespacedKey name);
 
     /**
      * Register a new {@link Target}. A Target can fail registration
@@ -36,7 +37,7 @@ public interface ITargetManager {
      * @param name the name of the Target
      * @return the {@link Target}, or {@link EmptyTarget} if none found.
      */
-    Target getTarget(String name);
+    Target getTarget(NamespacedKey name);
 
     /**
      * Remove a {@link Target} that matches the given name. The name is not
@@ -45,7 +46,7 @@ public interface ITargetManager {
      * @param name the name of the Target to remove
      * @return true if the Target was successfully removed
      */
-    boolean removeTarget(String name);
+    boolean removeTarget(NamespacedKey name);
 
     /**
      * Remove a {@link Target}.

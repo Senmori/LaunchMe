@@ -1,21 +1,20 @@
 package net.senmori.launchme.managers;
 
-import net.senmori.launchme.adapters.TargetTypeAdapter;
-import net.senmori.launchme.targets.EmptyTarget;
+import net.senmori.launchme.adapters.impl.TargetTypeAdapter;
+import net.senmori.launchme.service.TargetManager;
 import net.senmori.launchme.targets.Target;
-import net.senmori.senlib.configuration.IConfigurationListener;
+import org.bukkit.NamespacedKey;
 import org.bukkit.configuration.file.FileConfiguration;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
-public class TargetManagerImpl implements IConfigurationListener {
+public class TargetManagerImpl implements TargetManager {
     private static final TargetTypeAdapter DEFAULT_ADAPTER = new TargetTypeAdapter();
 
-    private final Map<String, Target> targetMap = new HashMap<>();
+    private final Map<NamespacedKey, Target> targetMap = new HashMap<>();
 
-    @Override
     public boolean onLoad(FileConfiguration config) {
         if (config.getKeys(false).isEmpty()) {
             return true; // no targets
@@ -32,11 +31,35 @@ public class TargetManagerImpl implements IConfigurationListener {
         return !targetMap.isEmpty();
     }
 
-    @Override
     public boolean onSave(FileConfiguration config) {
         for (Target target : targetMap.values()) {
             DEFAULT_ADAPTER.serialize(target, config);
         }
         return targetMap.isEmpty() || !config.getKeys(false).isEmpty();
+    }
+
+    @Override
+    public boolean isRegistered(NamespacedKey name) {
+        return targetMap.containsKey( name );
+    }
+
+    @Override
+    public boolean registerTarget(Target target) {
+        return targetMap.put( target.getName(), target ) == null;
+    }
+
+    @Override
+    public Target getTarget(NamespacedKey name) {
+        return targetMap.get( name );
+    }
+
+    @Override
+    public boolean removeTarget(NamespacedKey name) {
+        return targetMap.remove( name ) != null;
+    }
+
+    @Override
+    public boolean removeTarget(Target target) {
+        return targetMap.remove( target.getName(), target );
     }
 }

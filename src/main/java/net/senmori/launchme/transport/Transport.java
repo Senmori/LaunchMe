@@ -1,55 +1,56 @@
 package net.senmori.launchme.transport;
 
-import net.senmori.launchme.targets.EmptyTarget;
+import net.senmori.launchme.targets.impl.EmptyTarget;
 import net.senmori.launchme.targets.Target;
+import org.bukkit.Keyed;
 import org.bukkit.Location;
 import org.bukkit.entity.LivingEntity;
 
 /**
  * Represents a method of transporting entities from one Location to another.
  */
-public interface ITransport {
+public interface Transport extends Keyed {
 
     /**
-     * Get the name of this ITransport.
+     * Get the {@link TransportType} this transport uses.
      *
-     * @return the name of this ITransport
+     * @return the TransportType
      */
-    String getName();
+    TransportType getTransportType();
 
     /**
-     * Get the {@link Location} of this ITransport.
+     * Get the {@link TransportOptions} for this Transport.
+     * TransportOptions dictate certain behavior for transports.
      *
-     * @return the Location of this ITransport.
+     * @return the {@link TransportOptions}
+     */
+    TransportOptions getOptions();
+
+    /**
+     * Get the {@link Location} of this Transport.
+     *
+     * @return the Location of this Transport.
      */
     Location getLocation();
 
     /**
-     * Get the {@link ITransportOptions} for this ITransport.
-     * TransportOptions dictate certain behavior for transports.
-     *
-     * @return the {@link ITransportOptions}
-     */
-    ITransportOptions getOptions();
-
-    /**
-     * Get the current {@link Target} for this ITransport.
+     * Get the current {@link Target} for this Transport.
      * If no target is set, {@link EmptyTarget}
      * will be used instead.
      *
-     * @return the current Target, or EmptyTarget
+     * @return the current Target
      */
     Target getTarget();
 
     /**
-     * Set the current {@link Target} for this ITransport.
+     * Set the current {@link Target} for this Transport.
      *
      * @param target the new Target
      */
     void setTarget(Target target);
 
     /**
-     * Check if the {@link LivingEntity} can activate this ITransport.
+     * Check if the {@link LivingEntity} can activate this Transport.
      *
      * @param entity the entity to check
      * @return true if the entity can be transported
